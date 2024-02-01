@@ -1,0 +1,153 @@
+.main {
+  background-color: rgb(255,255,255);
+  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+  margin-bottom: 1.5rem!important;
+  /*flex-flow: row nowrap;*/
+  /*text-align: center;*/
+  /*justify-content: flex-start;*/
+  padding: 0px 0 30px 0;
+}
+
+.main div {
+  text-align: center;
+}
+
+#icon {
+  font-size: 30px;
+}
+
+@media (min-width: 768px) {
+  #icon {
+    font-size: 50px;
+    cursor: pointer;
+  }
+}
+
+.exchange {
+  padding: 30px 0;
+}
+
+.forms {
+  /*height: 100vh;*/
+  position: relative;
+}
+
+.container.flip {
+}
+
+.form-check {
+  text-align: left;
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .form-check {
+    display: inline-block;
+    margin: 0 15px;
+  }
+}
+
+#found {
+  display: none;
+  overflow: hidden;
+  /*max-height: 0vh;*/
+  /*transition: height 0.5s;*/
+}
+
+#search {
+  display: none;
+  overflow: hidden;
+  /*height: 0;*/
+  /*transition: height 0.5s;*/
+  /*max-height: 0vh;*/
+}
+
+.doc-img {
+  font-size: .8rem;
+  border-radius: 10rem;
+  /*padding: 1.5rem 1rem;*/
+}
+
+.doc-img:focus {
+  color: #6e707e;
+  background-color: #fff;
+  border-color: #bac8f3;
+  outline: 0;
+  box-shadow: 0 0 0 .2rem rgba(78,115,223,.25);
+}
+
+#img-preview {
+  width: 100%;
+}
+
+#img-preview2 {
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  #img-preview2 {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .text-center.my-auto.copyright {
+    font-size: 10px;
+    padding: 10px;
+  }
+}
+
+#popup {
+  display: none;
+  overflow: hidden;
+  width: 100%;
+}
+
+#popup i {
+  font-size: 200px;
+  color: var(--success);
+  cursor: default;
+  margin: 50px;
+}
+
+@media (min-width: 768px) {
+  #popup i {
+    font-size: 400px;
+  }
+}
+
+#popup p {
+  font-size: 30px;
+  color: var(--success);
+  /*cursor: default;*/
+  margin: 30px;
+}
+
+@media (max-width: 768px) {
+  #content {
+    font-size: 10px;
+  }
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.card.shadow.comment {
+  margin: 40px 0;
+}
+
+.card-body.comment {
+}
+
+.form-control.form-control-lg.form-control-user {
+}
+
+.form-control-text {
+  font-size: .8rem;
+  border-radius: 10rem;
+  /*padding: 0;*/
+  /*background-color: transparent;*/
+}
+
