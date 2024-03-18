@@ -44,24 +44,21 @@
                                             <div class="p-5">
                                                 <h4 class="text-dark mb-4">Quel document avez-vous trouvé?<br></h4>
                                                 <div class="text-center"></div>
-                                                <div>
-                                                 @if($errors->any())
-                                                   <ul>
-                                                    @foreach($errors->all() as $error)
-                                                      <li> {{$error}}</li>
-                                                    @endforeach
-                                                   </ul>
+                                                @if(session()->has('success'))
+                                                 <div class="alert alert-success">
+                                                     {{ session('success') }}
+                                                 </div>
                                                 @endif
-                                                </div>
                                                 <form method="post" action="{{route('traitement')}}" enctype="multipart/form-data" >
                                                 @csrf
                                                     @method('post')
-                                                    <div class="form-group">
-                                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-4" name="type" checked="checked" value="CNI"><label class="form-check-label" for="formCheck-1">CNI</label></div>
-                                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2" name="type" value="passport"><label class="form-check-label" for="formCheck-1">Passport</label></div>
-                                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-5" name="type" value="licence"><label class="form-check-label" for="formCheck-1">Licence</label></div>
-                                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-3" name="type" value="other"><label class="form-check-label" for="formCheck-1">Autre</label></div>
-                                                    </div>
+                                                    <select class="form-control mb-4" name="type" >
+                                                        <option class="form-control" value="CNI">CNI</option>
+                                                        <option class="form-control" value="Passport">Passport</option>
+                                                        <option class="form-control" value="Licence">Licence</option>
+                                                        <option class="form-control" value="autres">Autres</option>
+                                                        </select>  
+                                                    
                                                     <div class="form-group row">
                                                         <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-text" type="text" id="exampleFirstName" placeholder="Nom sur doc" name="name" required=""></div>
                                                         <div class="col-sm-6"><input class="form-control form-control-text" type="text" id="exampleFirstName-3" placeholder="Prénom sur doc" name="surname" required=""></div>
@@ -70,7 +67,7 @@
                                                     <div class="form-group"><input class="form-control form-control-text" type="tel" name="contact" placeholder="Votre numero de téléphone" aria-describedby="Contact" required=""></div>
                                                     <div class="form-group"><input class="form-control form-control-text" type="text" placeholder="Localisation du document" name="localisation" required=""></div>
                                                     <div class="form-group text-left"><label class="text-left" style="font-size: .8rem;">Image du document</label><img id="img-preview2">
-                                                    <input class="form-control-file doc-img" type="file" id="doc-img" required="" onchange="document.getElementById(&#39;img-preview&#39;).src=window.URL.createObjectURL(this.files[0]);document.getElementById(&#39;img-preview2&#39;).src=window.URL.createObjectURL(this.files[0])" name="img" enctype=""></div>
+                                                    <input class="form-control-file doc-img" type="file" id="doc-img" required="" onchange="document.getElementById(&#39;img-preview&#39;).src=window.URL.createObjectURL(this.files[0]);document.getElementById(&#39;img-preview2&#39;).src=window.URL.createObjectURL(this.files[0])" name="image"></div>
                                                     <button class="btn btn-primary btn-block text-white btn-user" type="submit" style="background: rgb(28,200,138);border-bottom-style: none;">Signaler</button>
                                                 
                                                     <hr>
@@ -109,27 +106,42 @@
                                         </div>
                                         <div class="col-lg-7">
                                             <div class="p-5" method="GET" action="">
+                                          
                                                 <h4 class="text-dark mb-4">Quel document cherchez-vous?<br></h4>
                                                 <div class="text-center"></div>
-                                                <form class="user">
-                                                    <div class="form-group">
-                                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-4" name="type" checked="checked"><label class="form-check-label" for="formCheck-1">CNI</label></div>
-                                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2" name="type"><label class="form-check-label" for="formCheck-1">Passport</label></div>
-                                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-5" name="type"><label class="form-check-label" for="formCheck-1">Permis de C</label></div>
-                                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-3" name="type"><label class="form-check-label" for="formCheck-1">Autre</label></div>
-                                                    </div>
+                                                <form class="user" method="get" action="{{ route('recherche') }}" enctype="multipart/form-data">
+                                                @csrf
+                                                <select class="form-control mb-4" name="type" >
+                                                        <option class="form-control">CNI</option>
+                                                        <option class="form-control">Passport</option>
+                                                        <option class="form-control">Licence</option>
+                                                        <option class="form-control">Autres</option>
+                                                        </select>  
+                                                  
                                                     <div class="form-group row">
                                                         <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-text" type="text" placeholder="Nom" name="name"></div>
                                                         <div class="col-sm-6"><input class="form-control form-control-text" type="text" placeholder="Prénom" name="surname"></div>
                                                     </div>
-                                                    <div class="form-group"><input class="form-control form-control-text" type="text" placeholder="Réference du document" name="ref"></div>
-                                                    <div class="form-group"><input class="form-control form-control-text" type="email" id="exampleInputEmail-2" aria-describedby="emailHelp" placeholder="Votre Adresse Email" name="mail"></div>
+                                                    <div class="form-group"><input class="form-control form-control-text" type="text" placeholder="Réference du document" name="reference"></div>
+                                                    <div class="form-group"><input class="form-control form-control-text" type="email" id="exampleInputEmail-2" aria-describedby="emailHelp" placeholder="Votre Adresse Email" name="email"></div>
                                                     <button class="btn btn-primary btn-block text-white btn-user" type="submit" style="background: rgb(246,194,62);border-bottom-style: none;border-bottom-color: rgba(78,115,223,0);">Rechecher</button>
                                                     <hr>
                                                 </form>
+
+                                                @if ($donneesTrouvees == 'true')
+                                                 <script>
+                                                   alert("Des données ont été trouvées.");
+                                                 </script>
+                                                 @endif
+                                                @if($donneesTrouvees == 'false')
+                                                 <script>
+                                                   alert("Aucune donnée n'a été trouvée.");
+                                                 </script>
+                                                @endif
                                                 <div class="text-left">
                                                     <p style="font-size: .8rem;">*Entrer le plus d'informations possible sans commettre d'erreur<br>*En cas d'aucun resultat, un mail vous sera envoyé immédiatement quand votre document sera enregistré<br></p>
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -153,7 +165,8 @@
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Pièces enregistrées</span></div>
-                                            <div class="text-dark font-weight-bold h5 mb-0"><span>1358</span></div>
+
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span>{{ $nb }}</span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-save fa-2x text-gray-300"></i></div>
                                     </div>
@@ -166,7 +179,7 @@
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span><strong>PIÈCES Restitués</strong><br></span></div>
-                                            <div class="text-dark font-weight-bold h5 mb-0"><span>215</span></div>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span>0</span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-reply fa-2x text-gray-300"></i></div>
                                     </div>
@@ -189,23 +202,23 @@
                                     <div class="card text-white bg-primary shadow">
                                         <div class="card-body">
                                             <p class="m-0">CNI</p>
-                                            <p class="text-white-50 small m-0">#931</p>
+                                            <p class="text-white-50 small m-0">{{ $element[0] }}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mb-4">
                                     <div class="card text-white bg-success shadow">
                                         <div class="card-body">
-                                            <p class="m-0">Permis de Conduire<br></p>
-                                            <p class="text-white-50 small m-0">#102</p>
+                                            <p class="m-0">Passport<br></p>
+                                            <p class="text-white-50 small m-0">{{ $element[1] }}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mb-4">
                                     <div class="card text-white bg-info shadow">
                                         <div class="card-body">
-                                            <p class="m-0">Passport<br></p>
-                                            <p class="text-white-50 small m-0">#52</p>
+                                            <p class="m-0">Licence<br></p>
+                                            <p class="text-white-50 small m-0">{{ $element[2] }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +226,7 @@
                                     <div class="card text-white bg-warning shadow">
                                         <div class="card-body">
                                             <p class="m-0">Autre</p>
-                                            <p class="text-white-50 small m-0">#273</p>
+                                            <p class="text-white-50 small m-0">{{ $element[3] }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -246,7 +259,7 @@
             </div>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
-                    <div class="text-center my-auto copyright" style="display: flex;"><span>Copyright © Return.doc 2021</span><span style="margin-left: auto!important;">Powered by ACCESS Tech<br></span></div>
+                    <div class="text-center my-auto copyright" style="display: flex;"><span>Copyright  © Return.doc 2021</span><span style="margin-left: auto!important;">Powered by ACCESS Tech<br></span></div>
                     <div class="text-center my-auto copyright"><a href="about.html">A propos de nous</a></div>
                 </div>
             </footer>

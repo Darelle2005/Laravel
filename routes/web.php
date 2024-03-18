@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\cnicontroller;
-use App\Http\Controllers\passportcontrol;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +14,13 @@ use App\Http\Controllers\passportcontrol;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [cnicontroller::class, 'index']);
+    
+
 Route::post('/Modele', [cnicontroller::class, 'traiterFormulaire'])->name('traitement');
-Route::post('/passport', [passportcontrol::class, 'traiterFormulaire']);
+Route::get('/recherche', [cnicontroller::class, 'rechercher'])->name('recherche');
+Route::get('/details/{id}', [cnicontroller::class, 'details'])->name('autre.vue');
+
 
 /*use App\Http\Controllers\control;
 

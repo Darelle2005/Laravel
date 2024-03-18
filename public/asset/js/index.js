@@ -4,8 +4,9 @@ $(document).ready(function() {
 		clear();
 		display("#search");
 		$(this).parent().css("border-bottom","2px solid var(--yellow)")
+	
 	});
-
+	display("#detail");
 	$("#found-btn").click( function(){
 		//alert("ok2");
 		clear();
